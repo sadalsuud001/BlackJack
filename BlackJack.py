@@ -1,4 +1,5 @@
 # Mini-project #6 - Blackjack
+
 import simplegui
 import random
 
@@ -7,8 +8,8 @@ CARD_SIZE = (73, 98)
 CARD_CENTER = (36.5, 49)
 card_images = simplegui.load_image("http://commondatastorage.googleapis.com/codeskulptor-assets/cards.jfitz.png")
 
-CARD_BACK_SIZE = (73, 98)
-CARD_BACK_CENTER = (36.5, 49)
+CARD_BACK_SIZE = (71, 96)
+CARD_BACK_CENTER = (35.5, 48)
 card_back = simplegui.load_image("http://commondatastorage.googleapis.com/codeskulptor-assets/card_back.png")
 
 # initialize some useful global variables
@@ -89,6 +90,7 @@ class Hand:
             pos[0] += 80
 
 
+
 # define deck class
 class Deck:
     def __init__(self):
@@ -125,6 +127,7 @@ def deal():
         outcome
         # your code goes here
         deck.shuffle()
+        outcome = "Hit or Stand?"
 
         player_hand = Hand()
         dealer_hand = Hand()
@@ -155,7 +158,7 @@ def hit():
         if player_hand.get_value() > 21:
             outcome = "You have busted. New deal?"
             in_play = False
-            print "You have busted"
+            print "You have busted. "
 
 def stand():
     global outcome, player_score, dealer_score, in_play
@@ -168,17 +171,17 @@ def stand():
     print "Dealer: %s" % dealer_hand
 
     if dealer_hand.get_value() > 21:
-        outcome = "Dealer busted. Congratulations!"
-        print "Dealer is busted. Player wins."
+        outcome = "Dealer busted. Congratulations! New Deal?"
+        print "Dealer is busted. Player wins. "
         player_score += 1
     else:
         if dealer_hand.get_value() >= player_hand.get_value() or player_hand.get_value() > 21:
-            print "Dealer wins"
+            print "Dealer wins."
             outcome = "Dealer wins. New deal?"
             dealer_score += 1
         else:
-            print "Player wins. New deal?"
-            outcome = "Player wins"
+            print "Player wins. "
+            outcome = "Player wins. New Deal?"
             player_score += 1
 
 
@@ -198,9 +201,6 @@ def draw(canvas):
 
     if in_play:
         canvas.draw_image(card_back, CARD_BACK_CENTER, CARD_BACK_SIZE, (136,199), CARD_BACK_SIZE)
-
-#    card = Card("S", "A")
-#    card.draw(canvas, [300, 300])
 
 
 # initialization frame
